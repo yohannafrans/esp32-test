@@ -6,32 +6,23 @@ import machine
 wifi_ssid = "hm"
 wifi_pass = "yohannafrans2"
 
-def connect_wlan(ssid=wifi_ssid, password=wifi_pass):
+def wifi_network(ssid=wifi_ssid, password=wifi_pass):
     sta_if = network.WLAN(network.STA_IF)
-    ap_if = network.WLAN(network.AP_IF)
-    sta_if.active(True)
-    ap_if.active(False)
-
     if not sta_if.isconnected():
-        print("Connecting to WLAN ({})...".format(ssid))
+        print("Connecting to network ({})...".format(ssid))
         sta_if.active(True)
         sta_if.connect(ssid, password)
         while not sta_if.isconnected():
             pass
+    print("network config:", sta_if.ifconfig())
     return True
 
 def main():
     gc.collect()
     gc.enable()
-
-    SSID = "hm"
-    PASSWORD = "yohannafrans"
-
-    connect_wlan(SSID, PASSWORD)
-
+    wifi_network(wifi_ssid, wifi_pass)
     GITHUB_URL = "https://raw.githubusercontent.com/yohannafrans/esp32-test/master/example/"
     OTA = senko.Senko(GITHUB_URL, ["boot.py", "main.py"])
-
     if OTA.fetch():
         print("A newer version is available!")
     else:
