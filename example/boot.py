@@ -22,12 +22,12 @@ def main():
     gc.enable()
     wifi_network(wifi_ssid, wifi_pass)
     GITHUB_URL = "https://raw.githubusercontent.com/yohannafrans/esp32-test/master/example/"
-    OTA = senko.Senko(GITHUB_URL, ["boot.py", "main.py"])
+    OTA = senko.Senko(GITHUB_URL, ["main.py"])
     if OTA.fetch():
         print("A newer version is available!")
-        if OTA.update():
-            print("Updated to the latest version! Rebooting...")
-            machine.reset()
+        OTA.update()
+        print("Updated to the latest version! Rebooting...")
+        machine.reset()
     else:
         print("Up to date!")
     
