@@ -25,12 +25,11 @@ def main():
     OTA = senko.Senko(GITHUB_URL, ["boot.py", "main.py"])
     if OTA.fetch():
         print("A newer version is available!")
+        if OTA.update():
+            print("Updated to the latest version! Rebooting...")
+            machine.reset()
     else:
         print("Up to date!")
-
-    if OTA.update():
-        print("Updated to the latest version! Rebooting...")
-        machine.reset()
     
 if __name__ == "__main__":
     main()
