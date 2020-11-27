@@ -20,7 +20,6 @@ def wifi_network(ssid=wifi_ssid, password=wifi_pass):
 def main():
     gc.collect()
     gc.enable()
-    wifi_network(wifi_ssid, wifi_pass)
     GITHUB_URL = "https://raw.githubusercontent.com/yohannafrans/esp32-test/master/example/"
     OTA = senko.Senko(GITHUB_URL, ["main.py"])
     if OTA.update():
@@ -28,4 +27,5 @@ def main():
         machine.reset()
     
 if __name__ == "__main__":
+    wifi_network()
     main()
