@@ -59,10 +59,11 @@ class Senko:
         Returns:
             True - if is, False - if not.
         """
-        if not self._check_all():
-            return False
-        else:
-            return True
+        while True:
+            if not self._check_all():
+                return False
+            else:
+                return True
 
     def update(self):
         """Replace all changed files with newer one.
@@ -74,8 +75,8 @@ class Senko:
         for file in changes:
             with open(file, "w") as local_file:
                 local_file.write(self._get_file(self.url + "/" + file))
-
-        if changes:
-            return True
-        else:
-            return False
+        while True:
+            if changes:
+                return True
+            else:
+                return False
